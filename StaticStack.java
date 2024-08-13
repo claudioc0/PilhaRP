@@ -17,13 +17,13 @@ public class StaticStack<T> {
     }
 
     public void push(T pushValue){
-        if (top == size - 1){
+        if (isFull()){
             throw new FullStackException(String.format("A pilha está cheia, nào é possível adicionar %s", pushValue));
         }
         data[++top] = pushValue;
     }
     public T pop(){
-        if (top == -1){
+        if (isEmpty()){
             throw new EmptyStackException();
         }
         return data[top--];
@@ -31,8 +31,16 @@ public class StaticStack<T> {
 
     public void clear(){
         top = -1;
-        for (int i = 0; i <= size; i ++ ){
+        for (int i = 0; i < size; i ++ ){
             data[i] = null;
         }
+    }
+
+    public boolean isFull(){
+        return top == size -1;
+    }
+
+    public boolean isEmpty(){
+        return top == -1;
     }
 }
