@@ -18,10 +18,11 @@ public class StaticStack<T> {
 
     public void push(T pushValue){
         if (isFull()){
-            throw new FullStackException(String.format("A pilha está cheia, nào é possível adicionar %s", pushValue));
+            throw new FullStackException(String.format("A pilha está cheia, não é possível adicionar %s", pushValue));
         }
         data[++top] = pushValue;
     }
+
     public T pop(){
         if (isEmpty()){
             throw new EmptyStackException();
@@ -31,16 +32,33 @@ public class StaticStack<T> {
 
     public void clear(){
         top = -1;
-        for (int i = 0; i < size; i ++ ){
+        for (int i = 0; i < size; i++){
             data[i] = null;
         }
     }
 
     public boolean isFull(){
-        return top == size -1;
+        return top == size - 1;
     }
 
     public boolean isEmpty(){
         return top == -1;
+    }
+
+    @Override
+    public String toString() {
+        if (isEmpty()) {
+            return "Pilha vazia";
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("Pilha: [");
+        for (int i = 0; i <= top; i++) {
+            sb.append(data[i]);
+            if (i < top) {
+                sb.append(", ");
+            }
+        }
+        sb.append("]");
+        return sb.toString();
     }
 }
